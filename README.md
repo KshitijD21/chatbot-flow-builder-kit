@@ -1,7 +1,5 @@
 # Chatbot Flow Builder Starter Kit
 
-![Chatbot Flow Builder](./screenshot.jpeg)
-
 A modern, extensible starter kit for building chatbot flow editors using React, React Flow, Zustand, and TypeScript.
 
 ## Table of Contents
