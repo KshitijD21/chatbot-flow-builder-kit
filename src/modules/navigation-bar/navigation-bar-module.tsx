@@ -30,7 +30,7 @@ export function NavigationBarModule() {
         <div className="flex items-center py-0.5 pl-2">
           <div className="size-8 flex shrink-0 select-none items-center justify-center rounded-lg bg-teal-600 text-sm font-bold leading-none">
             <span className="translate-y-px">
-              DS
+              KD
             </span>
           </div>
 
