@@ -41,7 +41,7 @@ type ConditionalPathNodeProps = NodeProps<Node<ConditionalPathNodeData, typeof N
 export function ConditionalPathNode({ id, isConnectable, selected, data }: ConditionalPathNodeProps) {
   const meta = useMemo(() => getNodeDetail(NODE_TYPE), [])
 
-  const [sourceHandleId] = useState<string>(nanoid())
+  const [sourceHandleId] = useState<string>(() => nanoid())
 
   const { setNodes, setEdges } = useReactFlow()
   const deleteNode = useDeleteNode()

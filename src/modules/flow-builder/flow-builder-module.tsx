@@ -55,17 +55,13 @@ export function FlowBuilderModule() {
 
   const handleAutoAdjustNodeAfterNodeMeasured = useCallback(
     (id: string) => {
+      // Use a slightly longer timeout to ensure measurement is complete without recursion
       setTimeout(() => {
         const node = getNodes().find(n => n.id === id)
-        if (!node) { return }
-
-        if (node.measured === undefined) {
-          handleAutoAdjustNodeAfterNodeMeasured(id)
-          return
+        if (node && node.measured) {
+          autoAdjustNode(node)
         }
-
-        autoAdjustNode(node)
-      })
+      }, 50)
     },
     [autoAdjustNode, getNodes],
   )

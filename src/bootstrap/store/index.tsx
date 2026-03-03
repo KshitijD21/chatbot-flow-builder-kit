@@ -37,48 +37,48 @@ export type StoreInstance<T, M> = ReturnType<ReturnType<typeof defineStoreInstan
 export function createStoreContext<T, M>(instance: DefineStoreInstance<T, M>) {
   const StoreContext = createContext<StoreInstance<T, M> | null>(null)
 
-    type StoreProviderProps = Readonly<{
-      children: ReactNode;
-      initial?: DeepPartial<T>;
-    }>
+  type StoreProviderProps = Readonly<{
+    children: ReactNode;
+    initial?: DeepPartial<T>;
+  }>
 
-    function StoreProvider({ children, initial }: StoreProviderProps) {
-      const storeRef = useRef<StoreInstance<T, M>>()
-      if (!storeRef.current) {
-        storeRef.current = instance(initial) as StoreInstance<T, M>
-      }
-
-      return (
-        <StoreContext.Provider value={storeRef.current}>
-          {children}
-        </StoreContext.Provider>
-      )
+  function StoreProvider({ children, initial }: StoreProviderProps) {
+    const storeRef = useRef<StoreInstance<T, M>>()
+    if (!storeRef.current) {
+      storeRef.current = instance(initial) as StoreInstance<T, M>
     }
 
-    function useStoreContext<K>(selector: (state: T & M) => K): K {
-      const store = useContext(StoreContext)
+    return (
+      <StoreContext.Provider value={storeRef.current}>
+        {children}
+      </StoreContext.Provider>
+    )
+  }
 
-      if (!store) {
-        throw new Error('useStore must be used within a StoreProvider')
-      }
+  function useStoreContext<K>(selector: (state: T & M) => K): K {
+    const store = useContext(StoreContext)
 
-      return useStore(store, selector)
+    if (!store) {
+      throw new Error('useStore must be used within a StoreProvider')
     }
 
-    function withStoreProvider<P extends PropsWithChildren>(component: FC<P>, initial?: DeepPartial<T>): FC<P> {
-      const Component = component
+    return useStore(store, selector)
+  }
 
-      return props => (
-        <StoreProvider initial={initial}>
-          <Component {...props} />
-        </StoreProvider>
-      )
-    }
+  function withStoreProvider<P extends PropsWithChildren>(component: FC<P>, initial?: DeepPartial<T>): FC<P> {
+    const Component = component
 
-    return [
-      StoreProvider,
-      useStoreContext,
-      withStoreProvider,
-      StoreContext,
-    ] as const
+    return props => (
+      <StoreProvider initial={initial}>
+        <Component {...props} />
+      </StoreProvider>
+    )
+  }
+
+  return [
+    StoreProvider,
+    useStoreContext,
+    withStoreProvider,
+    StoreContext,
+  ] as const
 }
