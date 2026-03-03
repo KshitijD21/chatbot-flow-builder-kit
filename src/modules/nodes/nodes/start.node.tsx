@@ -21,7 +21,7 @@ type StartNodeProps = NodeProps<Node<StartNodeData, typeof NODE_TYPE>>
 export function StartNode({ data, selected, isConnectable }: StartNodeProps) {
   const meta = useMemo(() => getNodeDetail(NODE_TYPE), [])
 
-  const [sourceHandleId] = useState<string>(nanoid())
+  const [sourceHandleId] = useState<string>(() => nanoid())
 
   return (
     <>

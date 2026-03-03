@@ -31,7 +31,7 @@ export function TextMessageNode({ id, isConnectable, selected, data }: TextMessa
   const meta = useMemo(() => getNodeDetail(NODE_TYPE), [])
 
   const [showNodePropertiesOf] = useApplicationState(s => [s.actions.sidebar.showNodePropertiesOf])
-  const [sourceHandleId] = useState<string>(nanoid())
+  const [sourceHandleId] = useState<string>(() => nanoid())
 
   const { setNodes } = useReactFlow()
   const deleteNode = useDeleteNode()

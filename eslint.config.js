@@ -42,8 +42,6 @@ export default antfu(
 
       'jsdoc/check-param-names': 'off',
 
-      'import/no-cycle': ['error', { maxDepth: '∞' }],
-
       'node/handle-callback-err': ['error', '^(err|error)$'],
 
       'unicorn/throw-new-error': 'off',

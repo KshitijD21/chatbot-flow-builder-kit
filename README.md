@@ -105,7 +105,7 @@ Here's how you can add a new node, using the Start Node as a reference:
 
      export function CustomNode({ data, selected, isConnectable }: CustomNodeProps) {
        const meta = useMemo(() => getNodeDetail(NODE_TYPE), [])
-       const [sourceHandleId] = useState<string>(nanoid())
+       const [sourceHandleId] = useState<string>(() => nanoid())
        return (
          <>
            <div

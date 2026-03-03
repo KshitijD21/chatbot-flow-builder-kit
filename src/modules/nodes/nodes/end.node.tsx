@@ -21,7 +21,7 @@ type EndNodeProps = NodeProps<Node<EndNodeData, typeof NODE_TYPE>>
 export function EndNode({ data, selected, isConnectable }: EndNodeProps) {
   const meta = useMemo(() => getNodeDetail(NODE_TYPE), [])
 
-  const [sourceHandleId] = useState<string>(nanoid())
+  const [sourceHandleId] = useState<string>(() => nanoid())
 
   return (
     <>
